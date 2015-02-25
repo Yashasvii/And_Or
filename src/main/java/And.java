@@ -1,18 +1,19 @@
 /**
  * Created by yashasvi on 2/23/15.
  */
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class And {
-    private String file1;
-    private String file2;
 
-    public And(String file1, String file2) {
-        this.file1 = file1;
-        this.file2 = file2;
+    private File andFile;
+
+    public And(String file) {
+        this.andFile = new File(file);
+
     }
 
     private String[] getFile1content(String file) throws IOException {
@@ -31,11 +32,11 @@ public class And {
 
     }
 
-    public String getAndFile() throws IOException {
-        File file = new File("/home/yashasvi/Main/src/resources/Andresult.csv");
-        if (!file.exists()) {
-            file.createNewFile();
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+    public String getAndFile(String file1, String file2) throws IOException {
+
+        if (!andFile.exists()) {
+            andFile.createNewFile();
+            FileWriter fw = new FileWriter(andFile.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
             for (String content1 : getFile1content(file1)) {
                 for (String content2 : getFile1content(file2))
@@ -43,7 +44,7 @@ public class And {
             }
             bw.close();
         }
-        return file.getAbsolutePath();
+        return andFile.getAbsolutePath();
 
 
     }

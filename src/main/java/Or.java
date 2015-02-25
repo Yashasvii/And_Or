@@ -1,43 +1,42 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by yashasvi on 2/23/15.
  */
 public class Or {
 
-    private String file1;
-    private   String complementFile1;
-    private   String file2;
-    private String complementFile2;
+    private String orFile1;
+    private String orFile2;
+    private String orFile3;
 
-    public String getFile1() {
-        return file1;
+    public Or(String file1, String file2, String file3) {
+        this.orFile1 = file1;
+        this.orFile2 = file2;
+        this.orFile3 = file3;
+
     }
 
-    public void setFile1(String file1) {
-        this.file1 = file1;
+    public String[] getOrFiles(String file1, String file2, String complementFile1, String complementFile2) throws IOException {
+        List<String> content = new ArrayList<String>();
+        And and1 = new And(orFile1);
+        content.add(and1.getAndFile(file1, file2));
+
+        And and2 = new And(orFile2);
+        content.add(and2.getAndFile(file1, complementFile2));
+
+        And and3 = new And(orFile3);
+        content.add(and3.getAndFile(complementFile1, file2));
+
+
+        return content.toArray(new String[content.size()]);
+
+
     }
 
-    public String getComplementFile1() {
-        return complementFile1;
-    }
-
-    public void setComplementFile1(String complementFile1) {
-        this.complementFile1 = complementFile1;
-    }
-
-    public String getFile2() {
-        return file2;
-    }
-
-    public void setFile2(String file2) {
-        this.file2 = file2;
-    }
-
-    public String getComplementFile2() {
-        return complementFile2;
-    }
-
-    public void setComplementFile2(String complementFile2) {
-        this.complementFile2 = complementFile2;
-    }
 }
 
